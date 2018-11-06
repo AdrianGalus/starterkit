@@ -6,9 +6,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+@NamedQueries({
+		@NamedQuery(name = "Customer.findAll", query = "SELECT c FROM CustomerEntity c"),
+		@NamedQuery(name = "Customer.findByPrimaryKey", query = "SELECT c FROM CustomerEntity c WHERE c.id = :id"),
+		@NamedQuery(name = "Customer.findByLastName", query = "SELECT c FROM CustomerEntity c WHERE c.lastName = :lastName")
+})
 @Entity
 @Table(name = "CUSTOMER")
 public class CustomerEntity {
