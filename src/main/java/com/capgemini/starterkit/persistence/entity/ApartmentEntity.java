@@ -9,6 +9,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -37,6 +39,10 @@ public class ApartmentEntity {
 
 	@Column(nullable = false)
 	private BigDecimal price;
+
+	@ManyToOne
+	@JoinColumn(name = "CUSTOMER_ID")
+	private CustomerEntity customer;
 
 	public Long getId() {
 		return id;
@@ -92,6 +98,14 @@ public class ApartmentEntity {
 
 	public void setPrice(BigDecimal price) {
 		this.price = price;
+	}
+
+	public CustomerEntity getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(CustomerEntity customer) {
+		this.customer = customer;
 	}
 
 }

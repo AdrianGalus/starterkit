@@ -1,10 +1,15 @@
 package com.capgemini.starterkit.persistence.entity;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,6 +33,10 @@ public class BuildingEntity {
 
 	@Column(nullable = false)
 	private Integer numberOfFloors;
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "BUILDING_ID")
+	Set<ApartmentEntity> apartments;
 
 	public Long getId() {
 		return id;
@@ -75,6 +84,14 @@ public class BuildingEntity {
 
 	public void setNumberOfFloors(Integer numberOfFloors) {
 		this.numberOfFloors = numberOfFloors;
+	}
+
+	public Set<ApartmentEntity> getApartments() {
+		return apartments;
+	}
+
+	public void setApartments(Set<ApartmentEntity> apartments) {
+		this.apartments = apartments;
 	}
 
 }

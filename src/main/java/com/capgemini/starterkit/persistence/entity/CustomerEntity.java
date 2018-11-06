@@ -5,8 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +27,10 @@ public class CustomerEntity {
 
 	@Column(nullable = false)
 	private String telephoneNrumber;
+
+	@OneToOne
+	@JoinColumn(name = "ADDRESS_ID")
+	private AddressEntity address;
 
 	public Long getId() {
 		return id;
@@ -50,6 +54,14 @@ public class CustomerEntity {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public AddressEntity getAddress() {
+		return address;
+	}
+
+	public void setAddress(AddressEntity address) {
+		this.address = address;
 	}
 
 	public String getEmail() {
