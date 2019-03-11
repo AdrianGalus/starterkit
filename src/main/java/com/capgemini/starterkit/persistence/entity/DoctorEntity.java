@@ -2,6 +2,8 @@ package com.capgemini.starterkit.persistence.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,14 +13,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@NamedQueries({
-		@NamedQuery(name = "Customer.findAll", query = "SELECT c FROM CustomerEntity c"),
-		@NamedQuery(name = "Customer.findByPrimaryKey", query = "SELECT c FROM CustomerEntity c WHERE c.id = :id"),
-		@NamedQuery(name = "Customer.findByLastName", query = "SELECT c FROM CustomerEntity c WHERE c.lastName = :lastName")
-})
+@NamedQueries({ @NamedQuery(name = "Doctor.findAll", query = "SELECT d FROM DoctorEntity d") })
 @Entity
-@Table(name = "CUSTOMER")
-public class CustomerEntity {
+@Table(name = "DOCTOR")
+public class DoctorEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,14 +28,21 @@ public class CustomerEntity {
 	@Column(nullable = false)
 	private String lastName;
 
-	private String email;
-
 	@Column(nullable = false)
-	private String telephoneNrumber;
+	private String telephoneNumber;
+
+	private String email;
 
 	@OneToOne
 	@JoinColumn(name = "ADDRESS_ID")
 	private AddressEntity address;
+
+	@Column(nullable = false)
+	private String doctorNumber;
+
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	private Specialization specialization;
 
 	public Long getId() {
 		return id;
@@ -63,12 +68,12 @@ public class CustomerEntity {
 		this.lastName = lastName;
 	}
 
-	public AddressEntity getAddress() {
-		return address;
+	public String getTelephoneNumber() {
+		return telephoneNumber;
 	}
 
-	public void setAddress(AddressEntity address) {
-		this.address = address;
+	public void setTelephoneNumber(String telephoneNumber) {
+		this.telephoneNumber = telephoneNumber;
 	}
 
 	public String getEmail() {
@@ -79,12 +84,28 @@ public class CustomerEntity {
 		this.email = email;
 	}
 
-	public String getTelephoneNrumber() {
-		return telephoneNrumber;
+	public AddressEntity getAddress() {
+		return address;
 	}
 
-	public void setTelephoneNrumber(String telephoneNrumber) {
-		this.telephoneNrumber = telephoneNrumber;
+	public void setAddress(AddressEntity address) {
+		this.address = address;
+	}
+
+	public String getDoctorNumber() {
+		return doctorNumber;
+	}
+
+	public void setDoctorNumber(String doctorNumber) {
+		this.doctorNumber = doctorNumber;
+	}
+
+	public Specialization getSpecialization() {
+		return specialization;
+	}
+
+	public void setSpecialization(Specialization specialization) {
+		this.specialization = specialization;
 	}
 
 }
