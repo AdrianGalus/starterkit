@@ -8,13 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@NamedQueries({
-		@NamedQuery(name = "Patient.findByLastName", query = "SELECT p FROM PatientEntity p WHERE p.lastName = :lastName") })
 @Entity
 @Table(name = "PATIENT")
 public class PatientEntity {
